@@ -1,16 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import Searchbar from '../UI-Reusable/Searchbar.js';
-import Portal from '../UI-Reusable/Portal.js';
-import PopupWindow from '../UI-Reusable/PopupWindow.js';
-import Invoice from "./Invoice";
+import Invoice from "./Invoice.js";
 import "./css/console.css"
 //WORK IN PROGRESS
 const BACKEND = process.env.REACT_APP_BACKEND;
 
-const Accounts = () => {
+const Customers = () => {
 
     const [invoices, setInvoices] = useState([]);
     const [dropdownIndex, setDropdownIndex] = useState(null);
@@ -133,7 +130,7 @@ const Accounts = () => {
             <div className="invoices-nondetailed-list">
                 {!invoices || invoices.length === 0 ? (
                     <div className="ndinvoicebox">
-                    <p>No accounts found</p>
+                    <p>No customers found</p>
                     </div>
                 ) : (
                     invoices.map((invoice, index) => (
@@ -151,4 +148,4 @@ const Accounts = () => {
         );
 }
 
-export default Accounts;
+export default Customers;

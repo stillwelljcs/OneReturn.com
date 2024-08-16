@@ -2,12 +2,12 @@ import React, { useContext, useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import Searchbar from '../UI-Reusable/Searchbar.js';
-import Invoice from "./Invoice";
+import Invoice from "./Invoice.js";
 import "./css/console.css"
 //WORK IN PROGRESS
 const BACKEND = process.env.REACT_APP_BACKEND;
 
-const MerchantConsole = () => {
+const Receipts = () => {
 
     const [invoices, setInvoices] = useState([]);
     const [dropdownIndex, setDropdownIndex] = useState(null);
@@ -148,4 +148,4 @@ const MerchantConsole = () => {
         );
 }
 
-export default MerchantConsole;
+export default Receipts;

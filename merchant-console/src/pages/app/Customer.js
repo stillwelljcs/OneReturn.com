@@ -6,7 +6,7 @@ import "./css/console.css";
 
 const BACKEND = process.env.REACT_APP_BACKEND;
 
-const Account = ({accountID}) => {
+const Customer = ({accountID}) => {
     
     const [accounts, setAccounts] = useState([]); 
     const [historyPage, setPage] = useState(false)
@@ -139,4 +139,4 @@ const Account = ({accountID}) => {
             );    
 }
 
-export default Account;
+export default Customer;

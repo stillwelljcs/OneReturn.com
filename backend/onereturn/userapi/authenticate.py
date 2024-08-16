@@ -18,7 +18,9 @@ from botocore.exceptions import ClientError
 load_dotenv()
 
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-print(AWS_SECRET_ACCESS_KEY)
+print(os.environ.get('AWS_ACCESS_KEY_ID'))
+print(os.environ.get('AWS_SECRET_ACCESS_KEY'))
+print(os.environ.get('AWS_REGION'))
 
 session = boto3.Session(
     aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'),
@@ -39,6 +41,39 @@ def issueAPIKey(owner):
     api_key_id = response['id']
     api_key_value = response['value']
 
+    usagePlan = client.create_usage_plan(
+        name='Plan',
+        description='basic usage plan for keys for testing.',
+        apiStages=[
+            {
+                'apiId':'nr2qqn4crf',
+                'stage':'test',
+            }
+        ],
+        throttle={
+            'burstLimit':100,
+            'rateLimit':50
+        },
+        quota={
+            'limit':1000,
+            'offset':0,
+            'period':'MONTH'
+        }
+    )
+
+    #extract key from usagePlan response
+
+    usagePlanID = usagePlan['id']
+    print("USAGE PLAN ID: " + usagePlanID)
+
+    #Assoc usage plan with api key
+
+    usagePlanKey = client.create_usage_plan_key(
+        usagePlanId = usagePlanID,
+        keyId = api_key_id,
+        keyType='API_KEY'
+    )
+    
     try:
         key = APIKey.objects.create(
             keyID = api_key_id,

@@ -13,7 +13,7 @@ const App = () => {
 
   const { pathname } = useLocation();
   const settingsDashPages = ['/settings', '/settings/user','/settings/receipts'];
-  const walletDashPages = ['/receipts', '/accounts', '/returns'];
+  const walletDashPages = ['/receipts', '/customers', '/dashboard', '/export'];
 
   useEffect(() => {
       if(walletDashPages.includes(pathname)){
