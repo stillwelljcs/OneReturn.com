@@ -16,5 +16,6 @@ urlpatterns = [
     path('register/', views.RegisterView.as_view(), name='register'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('changeSettings/', views.ChangeSettings.as_view(), name='changesettings'),
-    path('merchantReg/', views.MerchantRegisterView.as_view(), name='merchantreg')
+    path('merchantReg/', views.MerchantRegisterView.as_view(), name='merchantreg'),
+    path('stanleyEndpoint/', views.StanleyEndpoint.as_view(), name='stanleyEP')
 ]

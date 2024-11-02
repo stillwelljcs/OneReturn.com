@@ -185,3 +185,54 @@ def verifyEmail(source_email, to_email, verification_link, method=None):
             print(e.response['Error']['Message'])
         else:
             print("Email sent")
+
+def stanleyEmail(source_email, to_email, data):
+        
+        subject = 'An order has been placed!'
+        html_content = f"""
+        <html>
+        <body>
+            <h1>You have an order!</h1>
+            <h2>Order ID: {data[0]}</h2>
+            <h2>Payer ID: {data[1]}</h2>
+            <h2>Payment Details: {data[2]}</h2>
+            <h2>Cup: {data[3]}</h2>
+            <h2>Full Name: {data[4]}</h2>
+            <h2>Address Line 1: {data[5]}</h2>
+            <h2>Address Line 2: {data[6]}</h2>
+            <h2>City: {data[7]}</h2>
+            <h2>State: {data[8]}</h2>
+            <h2>Contact Info: {data[9]}</h2>
+        </body>
+        </html>
+        """
+
+        body_text = "An order has been placed"
+
+        try:
+            response = ses_client.send_email(
+                Destination={
+                      'ToAddresses': [to_email],
+                },
+                Message={
+                    'Body': {
+                        'Html': {
+                            'Charset': "UTF-8",
+                            'Data': html_content,
+                        },
+                        'Text': {
+                            'Charset': "UTF-8",
+                            'Data': body_text,
+                        },
+                    },
+                    'Subject': {
+                        'Charset': "UTF-8",
+                        'Data': subject,
+                    },
+                },
+                Source=source_email
+            )
+        except ClientError as e:
+            print(e.response['Error']['Message'])
+        else:
+            print("Email sent")

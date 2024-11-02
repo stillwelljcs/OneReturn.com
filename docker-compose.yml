@@ -31,6 +31,11 @@ services:
       context: ./api.onereturn.com-fe
     volumes:
       - api-frontend-build:/api-app/build
+  stanley-site:
+    build:
+      context: ./stanley-site
+    volumes:
+      - stanley-site-build:/stanley-site/build
   nginx:
     image: nginx:latest
     ports:
@@ -49,3 +54,4 @@ volumes:
   react_build:
   merchant-react-build:
   api-frontend-build:
+  stanley-site-build:
