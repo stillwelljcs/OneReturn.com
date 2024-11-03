@@ -46,6 +46,7 @@ services:
       - react_build:/var/www/react
       - merchant-react-build:/var/www/merchant-react
       - api-frontend-build:/var/www/api-frontend
+      - stanley-site-build:/var/www/stanley-site
       - /etc/letsencrypt:/etc/letsencrypt
     depends_on:
       - backend
