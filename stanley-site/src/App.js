@@ -38,7 +38,7 @@ function App() {
   }, [cup]);
 
   const initialOptions = {
-    clientID: 'AQ7-ifXKnJkjRkZKURCLi6EP_xU5eBAYCcs9lDaSX2i4zl0Dd0d_EiqVNuUCBxzp2L-DPziueRz6Mwdz',
+    clientID: 'AQ6xHjBrzohsjCOijUIQB_2EFUSlSPfdUiY5894TSN-N9oPJWrj_vXAoB6xSfaANw45cOQDMpwgw-LPK',
   };
 
   const styles = {
