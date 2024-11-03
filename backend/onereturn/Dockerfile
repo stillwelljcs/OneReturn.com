@@ -1,4 +1,6 @@
-FROM python:3.9.13-alpine
+#Using python-slim because its better for C-Dependant packages
+#Switched from alpine following sudden Gunicorn crashing issue possibly caused by pyscopg?? unsure.
+FROM python:3.9-slim
 ENV PYTHONUNBUFFERED 1
 WORKDIR /django
 COPY requirements.txt requirements.txt
