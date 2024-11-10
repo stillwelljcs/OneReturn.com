@@ -4,11 +4,7 @@ services:
   backend:
     build:
       context: ./backend/onereturn
-<<<<<<< HEAD
-    command: gunicorn onereturn.wsgi --bind 0.0.0.0:8000 --workers=5 --threads=1 --log-level=debug --access-logfile - --error-logfile -
-=======
     command: gunicorn onereturn.wsgi --bind 0.0.0.0:8000 --workers=1 --timeout 120
->>>>>>> a2afa18963eaacd5dd42274c21566ce95c05fc61
     ports:
       - "8000:8000"
     environment:
