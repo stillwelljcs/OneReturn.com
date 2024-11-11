@@ -5,7 +5,11 @@ body {
   width: 99%;
   height: 100%;
   background: rgb(86,90,92);
-  background: linear-gradient(158deg, rgba(86,90,92,1) 14%, rgba(124,176,207,1) 59%);
+  background: linear-gradient(158deg, rgb(116, 167, 192) 14%, rgba(124,176,207,1) 59%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 code {

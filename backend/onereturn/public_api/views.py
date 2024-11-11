@@ -24,12 +24,12 @@ class CreateInvoice(APIView):
         invoice_data = request.data.get("invoice", None)
         item_data = request.data.get("items", [])
         given_key = request.data.get("api_key", None).strip("'\"")
-        merchant_account = request.user.merchant_profile
+        merchantAccount = request.user.merchant_profile
         self.isValid = False
 
         try: 
             #searches and returns list of APIKey objs assoc with account and checks if any exist.
-            api_key = APIKey.objects.filter(owner__user__uuid=merchant_account.user.uuid)
+            api_key = APIKey.objects.filter(owner__user__uuid=merchantAccount.user.uuid)
             if api_key.count() > 0:
                     #iterates through keys to see if any match the key passed by user and if one does, sets isValid to true.
                     for key in api_key:
@@ -59,5 +59,46 @@ class CreateInvoice(APIView):
             else:
                 raise Exception("No API key associated with account")
         except AttributeError:
-            print("here 1")
             return Response({'ERROR':'You are not accessing this endpoint from a registered merchant account'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+class CaptureCustomerID(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        given_key = request.data.get("api_key", None).strip("'\"")
+        merchantAccount = request.user.merchant_profile
+        userID = request.data.get("user_id", None)
+        self.isValid = False
+        try: 
+            #searches and returns list of APIKey objs assoc with account and checks if any exist.
+            api_key = APIKey.objects.filter(owner__user__uuid=merchantAccount.user.uuid)
+            if api_key.count() > 0:
+                    #iterates through keys to see if any match the key passed by user and if one does, sets isValid to true.
+                    for key in api_key:
+                        if str(key.key) == given_key:
+                            self.isValid = True
+                    if self.isValid:
+                        if userID:
+                            
+                            if serialized_invoice.is_valid():
+                                invoice = Invoice.objects.create(**serialized_invoice.data)
+                                serialized_items = ItemSerializer(data=item_data, many=True)
+                                #Checks if request is properly formatted.
+                                if serialized_items.is_valid():
+                                    for validated_data in serialized_items.data:
+                                        validated_data['parent'] = invoice
+                                        item = Item.objects.create(**validated_data)
+
+                                    return Response({"success":f"created invoice: {invoice.invoiceID}"}, status=status.HTTP_200_OK)
+                                else:
+                                    return Response({"error":"bad request"}, status=status.HTTP_400_BAD_REQUEST)
+                            else:
+                                return Response({"error":"bad request"}, status=status.HTTP_400_BAD_REQUEST)
+                        else:
+                            return Response({"error":"No user ID provided"}, status=status.HTTP_400_BAD_REQUEST)
+                    else:
+                        return Response({'ERROR':'API key is either invalid or expired please contact customer support at support@onereturn.com'}, status=status.HTTP_401_UNAUTHORIZED)
+            else:
+                raise Exception("No API key associated with account")
+        except AttributeError:
+            print("here 1")

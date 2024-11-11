@@ -135,9 +135,26 @@ const handleApprove = async (data, actions) => {
                   <input type='text' id='state' name='state' onChange={handleInput}></input>
                   <label for='zipCode'>Zip Code</label>
                   <input type='text' id='zipCode' name='zipCode' onChange={handleInput}></input>
-                  <label for='contactInfo'>Please provide that we can contact you, in case there is an issue with your order (email, phone #, etc...)</label>
+                  <label for='contactInfo'>Please provide a method of contact, in case there is an issue with your order (email, phone #, etc...)</label>
                   <input type='text' id='contactInfo' name='contactInfo' onChange={handleInput}></input>
               </form>
+            </div>
+          </div>
+          <div className="checkout">
+                <h2>Checkout</h2>
+                <div className='checkout-item'>
+                  <div>
+                    <img className='checkout-img' src={`/assets/${cup}.png`} alt="Dynamic Image"/>
+                    <h4>1x {cup.charAt(0).toUpperCase() + cup.slice(1)} Quencher H2.0 FlowState™ Tumbler | 40 oz:   $35.00 USD </h4>
+                  </div>
+                </div>
+                <div>
+                  <h4>1x Standard Shipping: $5.00 USD</h4>
+                </div>
+                <div>
+                  <h4>Total: $40.00 USD</h4>
+                </div>
+              </div>
               <div className="payment">
                   <PayPalButtons
                   style={{ shape: 'rect', layout: 'vertical' }}
@@ -147,13 +164,35 @@ const handleApprove = async (data, actions) => {
                       purchase_units: [{
                         amount: { value: "35.00", currency_code: "USD" },
                       }],
+                      shipping: {
+                        options: [
+                          {
+                            id: "STANDARD",
+                            label: "Standard Shipping",
+                            type: "SHIPPING",
+                            selected: true,
+                            amount: {
+                              value: "5.00",
+                              currency_code: "USD",
+                            },
+                          },
+                          {
+                            id: "EXPRESS",
+                            label: "Express Shipping",
+                            type: "SHIPPING",
+                            selected: false,
+                            amount: {
+                              value: "15.00",
+                              currency_code: "USD",
+                            },
+                          },
+                        ],
+                      },
                     });
                   }}
                   onApprove={handleApprove}
                   />
               </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
