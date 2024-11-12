@@ -140,29 +140,31 @@ const handleApprove = async (data, actions) => {
               </form>
             </div>
           </div>
-          <div className="checkout">
-                <h2>Checkout</h2>
-                <div className='checkout-item'>
-                  <div>
-                    <img className='checkout-img' src={`/assets/${cup}.png`} alt="Dynamic Image"/>
-                    <h4>1x {cup.charAt(0).toUpperCase() + cup.slice(1)} Quencher H2.0 FlowState™ Tumbler | 40 oz:   $35.00 USD </h4>
-                  </div>
-                </div>
-                <div>
-                  <h4>1x Standard Shipping: $5.00 USD</h4>
-                </div>
-                <div>
-                  <h4>Total: $40.00 USD</h4>
-                </div>
+          {cup != '' && 
+            <div className="checkout">
+            <h2>Checkout</h2>
+            <div className='checkout-item'>
+              <div>
+                <img className='checkout-img' src={`/assets/${cup}.png`} alt="Dynamic Image"/>
+                <h4>1x {cup.charAt(0).toUpperCase() + cup.slice(1)} Quencher H2.0 FlowState™ Tumbler | 40 oz:   $35.00 USD </h4>
               </div>
-              <div className="payment">
+            </div>
+            <div>
+              <h4>1x Standard Shipping: $5.00 USD</h4>
+            </div>
+            <div>
+              <h4>Total: $40.00 USD</h4>
+            </div>
+            </div>
+          }
+            <div className="payment">
                   <PayPalButtons
                   style={{ shape: 'rect', layout: 'vertical' }}
                   createOrder={(data, actions) => {
                     console.log(formData);
                     return actions.order.create({
                       purchase_units: [{
-                        amount: { value: "35.00", currency_code: "USD" },
+                        amount: { value: "40.00", currency_code: "USD" },
                       }],
                       shipping: {
                         options: [
