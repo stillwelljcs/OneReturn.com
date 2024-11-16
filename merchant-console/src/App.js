@@ -6,6 +6,8 @@ import Router from './pages/nav/Routes.js';
 import Navbar from "./pages/nav/Navbar.js";
 import Sidebar from "./pages/app/Sidebar.js";
 
+//to be compressed
+
 const App = () => {
   const [sidebarState, dispatch] = useContext(SidebarContext);
   const changeDash = (type) => {dispatch({type})};
