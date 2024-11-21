@@ -74,44 +74,54 @@ const Invoice = ({invoiceID}) => {
         fetchData(invoiceID);
      }, [invoiceID]);
       
-     return (
-        <div className="invoice-container">
-            {invoices.map((invoice, index) => (
-                <React.Fragment key={index}>
-                    <div className="detailed-invoice-info">
-                        <h2 className="invoice-id-label">Invoice ID: {invoice.invoice.invoiceID}</h2>
-                        <h3>Merchant ID: {invoice.invoice.merchantID}</h3>
-                        <h3>Merchant Address: {invoice.invoice.merchantAddress}</h3>
-                        <h3>Merchant Store/Location Number: {invoice.invoice.merchantLocNumber}</h3>
-                        <h3>Recipient ID: {invoice.invoice.recipientID}</h3>
+    const renderInvoices = invoices.map((invoice, index) => (
+        <React.Fragment key={index}>
+                <div className="detailed-invoice-info">
+                    <div className="title-container">
+                        <div className="title-info-container">
+                            <h3 className="invoice-id-label">Invoice ID: {invoice.invoice.invoiceID}</h3>
+                            <h4>Merchant Name: {invoice.invoice.merchantName}</h4>
+                            <h4>Merchant ID: {invoice.invoice.merchantID}</h4>
+                            <h4>Recipient Name:</h4>
+                            <h4>Recipient ID: {invoice.invoice.recipientID}</h4>
+                        </div>
                     </div>
-                    <div className="buttons-container">
-                        <button id="toggle-button" onClick={() => setPage(false)}>Items</button>
-                        <button id="toggle-button" onClick={() => setPage(true)}>History</button>
-                    </div>
-                    {!historyPage && (
-                            <div className="item-list-container-expanded">
-                                <div className="item-list-expanded">
-                                    <h2>Items:</h2>
-                                    <div id="items">
-                                        {invoice.items.map((item, itemIndex) => (
-                                            <div key={itemIndex} className="ind-item-block">
-                                                <h3>{item.name}: ${item.price}</h3>
-                                                {item.returned && (
-                                                    <div>
-                                                        <p className="returned-label">RETURNED</p>
-                                                        <p className="returned-funds">-{item.price}</p>
-                                                    </div>
-                                                )}
+        
+                    <h3>Merchant Address: {invoice.invoice.merchantAddress}</h3>
+                    <h3>Merchant Store/Location Number: {invoice.invoice.merchantLocNumber}</h3>
+                </div>
+                <div className="buttons-container">
+                    <button id="toggle-button" onClick={() => setPage(false)}>Items</button>
+                    <button id="toggle-button" onClick={() => setPage(true)}>History</button>
+                </div>
+                {!historyPage && (
+                    <div className="item-list-container-expanded">
+                        <div className="item-list-expanded">
+                            <h2>Items:</h2>
+                            <div id="items">
+                                {invoice.items.map((item, itemIndex) => (
+                                    <div key={itemIndex} className="ind-item-block">
+                                        <h3>{item.name}: ${item.price}</h3>
+                                        {item.returned && (
+                                            <div>
+                                                <p className="returned-label">RETURNED</p>
+                                                <p className="returned-funds">-{item.price}</p>
                                             </div>
-                                        ))}
+                                        )}
                                     </div>
-                                </div>
+                                ))}
                             </div>
-                    )}
-                </React.Fragment>
-            ))}
-                    {historyPage && ( 
+                        </div>
+                    </div>
+                )}
+            </React.Fragment>
+        ));
+        
+        return (
+            <div className="invoice-container">
+                <div className="inner-container">
+                    {renderInvoices}
+                    {historyPage && (
                         <div className="transaction-history-container">
                             <h2>History:</h2>
                             <div id="items">
@@ -124,7 +134,9 @@ const Invoice = ({invoiceID}) => {
                         </div>
                     )}
                 </div>
-            );    
+            </div>
+        );
+        
 }
 
 export default Invoice;

@@ -3,7 +3,6 @@ import {Router, Switch, Route, Link } from 'react-router-dom';
 import PopupWindow from "../auth/PopupWindow";
 import Portal from "../../Util/Portal";
 import Invoice from "./Invoice";
-import Searchbar from "./Searchbar";
 import axios from "axios";
 import Cookies from "js-cookie";
 import './wallet.css'
@@ -117,9 +116,6 @@ const Wallet = () => {
 
     return (
         <div className="main-container">
-            <div className="searchbar-container">
-                <Searchbar onSearch={handleSearchResults}/>
-            </div>
             <div className="invoices-nondetailed-list">
                 {!invoices || invoices.length === 0 ? (
                     <div className="ndinvoicebox">

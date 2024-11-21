@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import Dropdown from "../app/Dropdown.js";
 import './styles/nav.css';
 import { NavbarVisContext } from "../../context/NavbarVisContext.js";
+import Searchbar from "../app/Searchbar";
 
 const Navbar = () => {
 
@@ -20,6 +21,10 @@ const Navbar = () => {
 
     const handleClick = () => setClick(!click);
     const toggleDropdown = () => setDropdown(!dropdown);
+
+    const handleSearchResults = () => {
+        console.log("filler");
+    }
 
     return (
         <nav className={isVisible ? "nav":"nav-invis"}>
@@ -47,6 +52,9 @@ const Navbar = () => {
                 )}
                 {isAuthenticated && (
                     <>
+                        <div className="searchbar-container">
+                            <Searchbar onSearch={handleSearchResults}/>
+                        </div>
                         <ul className='nav-menu-right'>
                             <li className="nav-item">
                                 <span className="nav-links" onClick={toggleDropdown}><i className='fa-solid fa-bars'/></span>

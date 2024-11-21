@@ -36,14 +36,6 @@ const Sidebar = () => {
               <i class="fa-solid fa-wallet fa-2xl"></i>
               <span className="dash-text">Wallet</span>
             </div>
-            <div className="menu-item" onClick={() => navigate('/shared')}>
-              <i class="fa-solid fa-users fa-2xl"></i>
-              <span className="dash-text">Shared</span>
-            </div>
-            <div className="menu-item" onClick={() => navigate('/returns')}>
-              <i class="fa-solid fa-arrow-left fa-2xl"></i>
-              <span className="dash-text">Returns</span>
-            </div>
           </div>
         );
     }
