@@ -31,11 +31,6 @@ services:
       context: ./api.onereturn.com-fe
     volumes:
       - api-frontend-build:/api-app/build
-  stanley-site:
-    build:
-      context: ./stanley-site
-    volumes:
-      - stanley-site-build:/stanley-site/build
   nginx:
     image: nginx:latest
     ports:
@@ -46,7 +41,6 @@ services:
       - react_build:/var/www/react
       - merchant-react-build:/var/www/merchant-react
       - api-frontend-build:/var/www/api-frontend
-      - stanley-site-build:/var/www/stanley-site
       - /etc/letsencrypt:/etc/letsencrypt
     depends_on:
       - backend
@@ -55,4 +49,3 @@ volumes:
   react_build:
   merchant-react-build:
   api-frontend-build:
-  stanley-site-build:
