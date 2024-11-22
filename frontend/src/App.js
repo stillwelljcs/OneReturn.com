@@ -43,7 +43,7 @@ const App = () => {
             <Sidebar/>
           )}
         </div>
-        <div className={sidebarState.visible ? "app-content-dashboard" : "app-content"}>
+        <div className={settingsDashPages.includes(pathname) ? "app-content-settings" : sidebarState.visible ? "app-content-dashboard" : "app-content"}>
           <AnimatedRoutes />
         </div>
       </div>

@@ -84,24 +84,20 @@ const Invoice = ({invoiceID}) => {
                             <h4>Merchant ID: {invoice.invoice.merchantID}</h4>
                             <h4>Recipient Name:</h4>
                             <h4>Recipient ID: {invoice.invoice.recipientID}</h4>
+                            <h4>Merchant Address: {invoice.invoice.merchantAddress}</h4>
+                            <h4>Merchant Store/Location Number: {invoice.invoice.merchantLocNumber}</h4>
                         </div>
-                    </div>
-        
-                    <h3>Merchant Address: {invoice.invoice.merchantAddress}</h3>
-                    <h3>Merchant Store/Location Number: {invoice.invoice.merchantLocNumber}</h3>
                 </div>
-                <div className="buttons-container">
-                    <button id="toggle-button" onClick={() => setPage(false)}>Items</button>
-                    <button id="toggle-button" onClick={() => setPage(true)}>History</button>
                 </div>
-                {!historyPage && (
-                    <div className="item-list-container-expanded">
+                <div className="item-list-container-expanded">
                         <div className="item-list-expanded">
                             <h2>Items:</h2>
                             <div id="items">
                                 {invoice.items.map((item, itemIndex) => (
                                     <div key={itemIndex} className="ind-item-block">
-                                        <h3>{item.name}: ${item.price}</h3>
+                                        <img className="ind-blk-component" src='undef'></img>
+                                        <h4 className="ind-blk-component">{item.name}:</h4>
+                                        <h4 className="ind-blk-component">${item.price}</h4>
                                         {item.returned && (
                                             <div>
                                                 <p className="returned-label">RETURNED</p>
@@ -112,8 +108,17 @@ const Invoice = ({invoiceID}) => {
                                 ))}
                             </div>
                         </div>
-                    </div>
-                )}
+                </div>
+                <div className="transaction-history-container">
+                            <h2>History:</h2>
+                            <div id="items">
+                                {invoices[0]?.invoice.transactionHistory.map((i, iIndex) => (
+                                    <div key={iIndex}>
+                                        <h4 className="ind-item-block">{i}</h4>
+                                    </div>
+                                ))}
+                            </div>
+                </div>
             </React.Fragment>
         ));
         
@@ -121,18 +126,6 @@ const Invoice = ({invoiceID}) => {
             <div className="invoice-container">
                 <div className="inner-container">
                     {renderInvoices}
-                    {historyPage && (
-                        <div className="transaction-history-container">
-                            <h2>History:</h2>
-                            <div id="items">
-                                {invoices[0]?.invoice.transactionHistory.map((i, iIndex) => (
-                                    <div key={iIndex}>
-                                        <h3 className="ind-item-block">{i}</h3>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
                 </div>
             </div>
         );

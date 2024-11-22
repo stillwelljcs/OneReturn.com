@@ -6,6 +6,7 @@ import Invoice from "./Invoice";
 import axios from "axios";
 import Cookies from "js-cookie";
 import './wallet.css'
+import Searchbar from "../app/Searchbar";
 
 const BACKEND = process.env.REACT_APP_BACKEND;
 
@@ -115,6 +116,24 @@ const Wallet = () => {
     }
 
     return (
+        <>
+        <div className="functions-bar">
+            <div className="funcbar-top-left">
+                <img className='func-bar-icons' id='move' src="/expand-arrows.svg"></img>
+                <img className='func-bar-icons' id='delete' src="/delete.svg"></img>
+                <img className='func-bar-icons' id='archive' src="/archive.svg"></img>
+                <img className='func-bar-icons' id='share' src="/share.svg"></img>
+            </div>
+            <div className="searchbar-container">
+                <Searchbar onSearch={handleSearchResults}/>
+            </div>
+            <div className="funcbar-top-right">
+                <img className='func-bar-icons' id='pin' src="/thumbtacks.svg"></img>
+                <img className='func-bar-icons' id='flag' src="/flag.svg"></img>
+                <img className='func-bar-icons' id='report' src="/danger.svg"></img>
+                <img className='func-bar-icons' id='print' src="/printer.svg"></img>
+            </div>
+        </div>
         <div className="main-container">
             <div className="invoices-nondetailed-list">
                 {!invoices || invoices.length === 0 ? (
@@ -124,8 +143,9 @@ const Wallet = () => {
                 ) : (
                     invoices.map((invoice, index) => (
                     <div className='ndinvoicebox' key={index} onClick={() => setInvoiceFocus(invoice.invoice.invoiceID)}>
-                        {console.log(invoice.invoice.invoiceID)}
-                        <h2>{invoice.invoice.invoiceID}</h2>
+                        <h5>Invoice ID: {invoice.invoice.invoiceID}</h5>
+                        <h5>Merchant Name: {invoice.invoice.merchantName}</h5>
+                        <h5>Merchant ID: {invoice.invoice.merchantID}</h5>
                     </div>
                     ))
                 )}
@@ -134,6 +154,7 @@ const Wallet = () => {
                 {currInvoice && <Invoice invoiceID={currInvoice}/> }
             </div>
         </div>
+        </>
         );
 }
 
