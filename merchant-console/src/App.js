@@ -4,7 +4,7 @@ import { Route, Redirect, Routes, useNavigate, useLocation} from 'react-router-d
 import { SidebarContext } from "./context/SidebarContext.js";
 import Router from './pages/nav/Routes.js';
 import Navbar from "./pages/nav/Navbar.js";
-import Sidebar from "./pages/app/Sidebar.js";
+import Sidebar from "./pages/nav/Sidebar.js";
 
 //to be compressed
 
