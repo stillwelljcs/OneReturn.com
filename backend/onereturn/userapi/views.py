@@ -174,6 +174,15 @@ class EditInvoice(APIView):
                         return Response({'status':'ERROR', 'message':'item has already been returned.'})
                 except Item.DoesNotExist:
                     return Response({"error":"there was an issue retrieving item data, try again."})
+                
+            elif action == "PIN":
+                try:
+                    invoice = Invoice.objects.get(invoiceID = invoiceID)
+                    invoice.pinned = not invoice.pinned
+                    invoice.save()
+                    return Response({"message":"pinned invoice"})
+                except Invoice.DoesNotExist:
+                    return Response({"error":"there was an issue retrieving requested invoice, try again."})
 
 class GetInvoice(APIView):
     authentication_classes = [TokenAuthentication]
@@ -201,7 +210,6 @@ class GetInvoice(APIView):
             return Response({"invoices":invoice_list})
         else:
             invoices = Invoice.objects.filter(recipientID=request.user.uuid)
-            print("2")
             if not invoices:
                 return Response({"message": "No invoices have been assigned to this user."}, status=status.HTTP_404_NOT_FOUND)
 

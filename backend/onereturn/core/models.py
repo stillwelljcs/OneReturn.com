@@ -101,6 +101,7 @@ class Invoice(models.Model):
     invoiceID = models.CharField(max_length=100, default=None)
     dateCreated = models.DateTimeField(default=None)
     flagged = models.BooleanField(default=False)
+    pinned = models.BooleanField(default=False)
     total = models.FloatField(default=0.00)
     cards_used = models.CharField(max_length=4, null=True)
     sharedWith = models.ManyToManyField("AppUser", default=None)
