@@ -18,6 +18,7 @@ const Wallet = () => {
     const [deleteIndex, setDeleteIndex] = useState(null);
     const [currInvoice, setCurrInvoice] = useState(null);
 
+    //will be removed soon due to poor security
     let data;
     try {
         data = JSON.parse(Cookies.get('data'));
@@ -128,7 +129,7 @@ const Wallet = () => {
                 <Searchbar onSearch={handleSearchResults}/>
             </div>
             <div className="funcbar-top-right">
-                <img className='func-bar-icons' id='pin' src="/thumbtacks.svg"></img>
+                <img className='func-bar-icons' id='pin' src="/thumbtacks.svg" onClick={() => editReceipt('PIN', currInvoice, data.uuid)}></img>
                 <img className='func-bar-icons' id='flag' src="/flag.svg"></img>
                 <img className='func-bar-icons' id='report' src="/danger.svg"></img>
                 <img className='func-bar-icons' id='print' src="/printer.svg"></img>
@@ -143,6 +144,9 @@ const Wallet = () => {
                 ) : (
                     invoices.map((invoice, index) => (
                     <div className='ndinvoicebox' key={index} onClick={() => setInvoiceFocus(invoice.invoice.invoiceID)}>
+                        {invoice.invoice.pinned &&
+                            <img className='nd-invoice-icon' src='/thumbtacks.svg'></img>
+                        }
                         <h5>Invoice ID: {invoice.invoice.invoiceID}</h5>
                         <h5>Merchant Name: {invoice.invoice.merchantName}</h5>
                         <h5>Merchant ID: {invoice.invoice.merchantID}</h5>

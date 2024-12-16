@@ -188,3 +188,13 @@
     border-radius: 5px;
     margin-top: 5%;
 }
+
+.func-bar-icons:hover {
+    cursor: pointer;
+    background-color: #f1f0f0;
+}
+
+.nd-invoice-icon {
+    width: 15px;
+    height: 15px;
+}

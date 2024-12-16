@@ -91,7 +91,7 @@ const Invoice = ({invoiceID}) => {
                 </div>
                 <div className="item-list-container-expanded">
                         <div className="item-list-expanded">
-                            <h2>Items:</h2>
+                            <h3>Items:</h3>
                             <div id="items">
                                 {invoice.items.map((item, itemIndex) => (
                                     <div key={itemIndex} className="ind-item-block">
@@ -110,7 +110,7 @@ const Invoice = ({invoiceID}) => {
                         </div>
                 </div>
                 <div className="transaction-history-container">
-                            <h2>History:</h2>
+                            <h3>History:</h3>
                             <div id="items">
                                 {invoices[0]?.invoice.transactionHistory.map((i, iIndex) => (
                                     <div key={iIndex}>

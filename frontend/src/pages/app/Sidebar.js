@@ -9,6 +9,11 @@ const Sidebar = () => {
 
     const [sidebarState, dispatch] = useContext(SidebarContext);
     let navigate = useNavigate();
+    const [walletDropdown, setWalletDropdown] = useState(false);
+
+    const toggleWalletDropdown = () => {
+      setWalletDropdown(!walletDropdown);
+    }
 
     switch(sidebarState.type) {
 
@@ -16,15 +21,12 @@ const Sidebar = () => {
         return (
           <div className="menu-container-settings">
             <div className="menu-item" onClick={() => navigate('/settings/user')}>
-              <i class="fa-solid fa-user"></i>
               <span className="dash-text">Profile</span>
             </div>
             <div className="menu-item" onClick={() => navigate('/settings/receipts')}>
-              <i class="fa-solid fa-receipt"></i>
               <span className="dash-text">Receipt Settings</span>
             </div>
             <div className="menu-item" onClick={() => navigate('/settings')}>
-              <i class="fa-solid fa-gears"></i>
               <span className="dash-text">App Settings</span>
             </div>
           </div>
@@ -33,9 +35,20 @@ const Sidebar = () => {
         return (
           <div className="menu-container-normal">
             <div className="menu-item" onClick={() => navigate('/wallet')}>
-              <i class="fa-solid fa-wallet fa-2xl"></i>
-              <span className="dash-text">Wallet</span>
+                <img className='sidebar-icons' id='sidebar-dropdown' src="/chevron.svg" onClick={() => toggleWalletDropdown()}></img>
+                <span className="dash-text">Wallet</span>
             </div>
+            {walletDropdown && (
+              <div className="wallet-sub-items">
+                <div className="menu-sub-item">
+                    <span className="dash-sub-text" onClick={() => navigate('/wallet/archived')}>Archived</span>
+                </div>
+                <div className="menu-sub-item">
+                    <span className="dash-sub-text" onClick={() => navigate('/wallet/trash')}>Trash</span>
+                </div>
+              </div>
+              )
+            }
           </div>
         );
     }

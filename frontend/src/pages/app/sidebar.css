@@ -30,9 +30,10 @@
   
   .menu-item {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    margin: 1rem 1rem 0rem 1rem;
     transition: all 0.3s ease;
   }
   
@@ -46,21 +47,32 @@
     align-items: center;
     text-align: center;
   }
-  
-  .menu-item i {
-    font-size: 2rem;
-    transition: font-size 0.3s ease;
-    color: #3a4a8d;
-  }
-  
-  .menu-item:hover i {
-    font-size: 2.2rem;
-    cursor: pointer;
-    color: #40539c;
-  }
-  
+
   .menu-item span {
     margin-top: 0.5rem;
     padding-left: 1rem;
     color: white;
+  }
+
+  .menu-item img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .menu-sub-item {
+    margin: 1rem 0rem 1rem 0rem;
+  }
+
+  .menu-sub-item:hover {
+    cursor: pointer;
+  }
+
+  .menu-sub-item span {
+    margin-top: 0.5rem;
+    padding-left: 1.5rem;
+    color: white;
+  }
+
+  .wallet-sub-items {
+    transition: all 0.3s ease;
   }
