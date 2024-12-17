@@ -121,7 +121,7 @@ const Wallet = () => {
         <div className="functions-bar">
             <div className="funcbar-top-left">
                 <img className='func-bar-icons' id='move' src="/expand-arrows.svg"></img>
-                <img className='func-bar-icons' id='delete' src="/delete.svg"></img>
+                <img className='func-bar-icons' id='delete' src="/delete.svg" onClick={() => editReceipt('DELETE', currInvoice, data.uuid)}></img>
                 <img className='func-bar-icons' id='archive' src="/archive.svg"></img>
                 <img className='func-bar-icons' id='share' src="/share.svg"></img>
             </div>
@@ -130,7 +130,7 @@ const Wallet = () => {
             </div>
             <div className="funcbar-top-right">
                 <img className='func-bar-icons' id='pin' src="/thumbtacks.svg" onClick={() => editReceipt('PIN', currInvoice, data.uuid)}></img>
-                <img className='func-bar-icons' id='flag' src="/flag.svg"></img>
+                <img className='func-bar-icons' id='flag' src="/flag.svg" onClick={() => editReceipt('FLAG', currInvoice, data.uuid)}></img>
                 <img className='func-bar-icons' id='report' src="/danger.svg"></img>
                 <img className='func-bar-icons' id='print' src="/printer.svg"></img>
             </div>
@@ -146,6 +146,9 @@ const Wallet = () => {
                     <div className='ndinvoicebox' key={index} onClick={() => setInvoiceFocus(invoice.invoice.invoiceID)}>
                         {invoice.invoice.pinned &&
                             <img className='nd-invoice-icon' src='/thumbtacks.svg'></img>
+                        }
+                        {invoice.invoice.flagged &&
+                            <img className='nd-invoice-icon' src='/flag.svg'></img>
                         }
                         <h5>Invoice ID: {invoice.invoice.invoiceID}</h5>
                         <h5>Merchant Name: {invoice.invoice.merchantName}</h5>
