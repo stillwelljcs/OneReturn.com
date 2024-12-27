@@ -1,0 +1,25 @@
+#container {
+    width: 100%;
+    aspect-ratio: 2/1;
+    margin: auto;
+    border: solid black 2px;
+    overflow-x: auto;
+    overflow-y: scroll;
+    white-space: nowrap;
+    scroll-snap-type: y mandatory;
+  }
+  .body{
+    background-color: rgb(255, 255, 255);
+    height: 100%;
+    aspect-ratio: 2/1;
+  }
+  .title {
+    background-color: rgb(192, 55, 55);
+    width: 100%;
+    aspect-ratio: 30/1;
+  }
+  .body, .title {
+    display: outside;
+    margin: 50px;
+    scroll-snap-align: center;
+  }
